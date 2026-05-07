@@ -12,7 +12,7 @@ PROC IMPORT DATAFILE= '/home/u64467553/sasuser.v94/data/Sewa26_data(neurodiv).cs
     GETNAMES=YES;
 RUN;
 
-PROC IMPORT DATAFILE= '/home/u64467553/sasuser.v94/data/Sewa26_data(nutrition).csv'
+PROC IMPORT DATAFILE= '/home/u64467553/sasuser.v94/data/Sewa26_data(gut-brain).csv'
     OUT=work.nutr
     DBMS=csv
     REPLACE;
