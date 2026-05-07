@@ -98,7 +98,7 @@ proc sgpie data=ND_cl;
     	datalabelattrs=(size=30 weight=bold);
 
 proc sgpie data=GB_cl;
-	title2 height = 30pt 'GBition and the Gut-Brain Connection';
+	title2 height = 30pt 'The Gut-Brain Connection';
 	styleattrs backcolor=lightblue;
     pie Learn /
     	datalabelattrs=(size=30 weight=bold);
@@ -117,7 +117,7 @@ proc means data = ND_cl; var improve;
 title2 height=12pt 'Neurodiversity';
 
 proc means data = GB_cl; var improve;
-title2 height=12pt 'GBition and the gut-brain connection';
+title2 height=12pt 'The gut-brain connection';
 
 proc means data = tech_cl;var improve;
 title2 height=12pt 'Technology mental health effects';
