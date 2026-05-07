@@ -13,7 +13,7 @@ PROC IMPORT DATAFILE= '/home/u64467553/sasuser.v94/data/Sewa26_data(neurodiv).cs
 RUN;
 
 PROC IMPORT DATAFILE= '/home/u64467553/sasuser.v94/data/Sewa26_data(gut-brain).csv'
-    OUT=work.nutr
+    OUT=work.GB
     DBMS=csv
     REPLACE;
     GETNAMES=YES;
@@ -47,8 +47,8 @@ data ND_cl;
 		else thresh = 0;
 	keep name topic age_group learn improve thresh;
 
-data nutr_cl;
-	set nutr;
+data GB_cl;
+	set GB;
 	pre_correct = 0;
 	post_correct = 0;
 	improve = 0;
@@ -88,7 +88,7 @@ data tech_cl;
 *******************************************;
 /* making an overall dataset */
 data agg;
-	set ND_cl nutr_cl tech_cl;
+	set ND_cl GB_cl tech_cl;
 
 /* summary stats */
 proc sgpie data=ND_cl;
@@ -97,8 +97,8 @@ proc sgpie data=ND_cl;
     pie Learn /
     	datalabelattrs=(size=30 weight=bold);
 
-proc sgpie data=nutr_cl;
-	title2 height = 30pt 'Nutrition and the Gut-Brain Connection';
+proc sgpie data=GB_cl;
+	title2 height = 30pt 'GBition and the Gut-Brain Connection';
 	styleattrs backcolor=lightblue;
     pie Learn /
     	datalabelattrs=(size=30 weight=bold);
@@ -116,8 +116,8 @@ title;
 proc means data = ND_cl; var improve;
 title2 height=12pt 'Neurodiversity';
 
-proc means data = nutr_cl; var improve;
-title2 height=12pt 'Nutrition and the gut-brain connection';
+proc means data = GB_cl; var improve;
+title2 height=12pt 'GBition and the gut-brain connection';
 
 proc means data = tech_cl;var improve;
 title2 height=12pt 'Technology mental health effects';
@@ -153,7 +153,7 @@ ods graphics off;
 proc freq data=agg;
    tables thresh / binomial(p=0.3) /* ideal 70% improved*/
    exact binomial; 
-proc freq data=nutr_cl;
+proc freq data=GB_cl;
    tables thresh / binomial(p=0.3) /* ideal 70% improved*/
    exact binomial; 
 proc freq data=tech_cl;
